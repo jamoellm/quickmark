@@ -44,11 +44,13 @@ git clone git@github.com:jamoellm/quickmark.git
 
 ## 🔒 Permissions
 
-This extension uses the following Firefox Manifest V3 permissions:
+This extension uses the following Firefox Manifest V2 permissions:
 
 * `bookmarks`: To search and update your saved bookmarks.
 * `activeTab`: To read the URL of your currently active tab.
 * `storage`: To store your defined Regex patterns locally.
+
+All data is stored locally.
 
 ---
 
