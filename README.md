@@ -10,23 +10,23 @@ Simply click the extension icon <img src="icon-32.png" style="height: 1.2em; ver
 
 ## 🚀 Features
 
-* **Automatic Updates:** If the extension detects a saved URL pattern (Regex) on your current page, it instantly overwrites the matching bookmark with your new URL.
-* **Pattern Management:** Easily create, edit, and delete custom URL patterns directly within the extension popup.
-* **Smart Matching:** Works seamlessly with sequential URLs (e.g., page numbers, episode IDs, or chapter URLs).
+- **Automatic Updates:** If the extension detects a saved URL pattern (Regex) on your current page, it instantly overwrites the matching bookmark with your new URL.
+- **Pattern Management:** Easily create, edit, and delete custom URL patterns directly within the extension popup.
+- **Smart Matching:** Works seamlessly with sequential URLs (e.g., page numbers, episode IDs, or chapter URLs).
 
 ---
 
 ## 💡 How It Works
 
 1. **Initial Setup:**
-   * Navigate to the website whose progress you want to track.
-   * Click the extension icon <img src="icon-32.png" style="height: 1.1em; vertical-align: middle;">.
-   * Enter a Regex pattern matching the URL structure (e.g., `example\.com/page/\d+`).
-   * Save the pattern. The extension links it to your existing bookmark.
+   - Navigate to the website whose progress you want to track.
+   - Click the extension icon <img src="icon-32.png" style="height: 1.1em; vertical-align: middle;">.
+   - Enter a Regex pattern matching the URL structure (e.g., `example\.com/page/\d+`).
+   - Save the pattern. The extension links it to your existing bookmark.
 
 2. **Save Your Progress:**
-   * As you continue reading or watching, simply click the icon <img src="icon-32.png" style="height: 1.1em; vertical-align: middle;"> again.
-   * Your bookmark is automatically updated to the current URL!
+   - As you continue reading or watching, simply click the icon <img src="icon-32.png" style="height: 1.1em; vertical-align: middle;"> again.
+   - Your bookmark is automatically updated to the current URL.
 
 ---
 
@@ -46,9 +46,9 @@ git clone git@github.com:jamoellm/quickmark.git
 
 This extension uses the following Firefox Manifest V2 permissions:
 
-* `bookmarks`: To search and update your saved bookmarks.
-* `activeTab`: To read the URL of your currently active tab.
-* `storage`: To store your defined Regex patterns locally.
+- `bookmarks`: To search and update your saved bookmarks.
+- `activeTab`: To read the URL of your currently active tab.
+- `storage`: To store your defined Regex patterns locally.
 
 All data is stored locally.
 
