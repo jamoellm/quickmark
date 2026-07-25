@@ -54,5 +54,4 @@ All data is stored locally.
 
 ---
 
-Icons by [Icons8.com](https://icons8.com/icons/set/folder--style-dusk)
-
+<a target="_blank" href="https://icons8.com/icon/46363/binder">Binder</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
