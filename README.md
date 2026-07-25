@@ -22,7 +22,7 @@ Simply click the extension icon <img src="icon-32.ico" style="height: 1.2em; ver
    * Navigate to the website whose progress you want to track.
    * Click the extension icon <img src="icon-32.ico" style="height: 1.1em; vertical-align: middle;">.
    * Enter a Regex pattern matching the URL structure (e.g., `example\.com/page/\d+`).
-   * Save the pattern – the extension links it to your existing bookmark.
+   * Save the pattern. The extension links it to your existing bookmark.
 
 2. **Save Your Progress:**
    * As you continue reading or watching, simply click the icon <img src="icon-32.ico" style="height: 1.1em; vertical-align: middle;"> again.

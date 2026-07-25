@@ -8,7 +8,6 @@
     #status { font-weight: bold; margin-bottom: 10px; }
     .hidden { display: none; }
 
-    /* Styling für die Pattern-Liste */
     hr { margin: 15px 0; border: 0; border-top: 1px solid #ccc; }
     ul { list-style: none; padding: 0; margin: 8px 0; max-height: 150px; overflow-y: auto; }
     li {
@@ -26,53 +25,23 @@
   </style>
 </head>
 <body>
-  <div id="status">Prüfe URL...</div>
+  <div id="status">Checking URL...</div>
 
   <div id="setup-form" class="hidden">
-    <label for="url"><strong>Aktuelle URL:</strong></label>
+    <label for="url"><strong>Current URL:</strong></label>
     <input type="text" id="url" readonly>
 
-    <label for="pattern" style="margin-top: 8px; display: block;"><strong>Neues Regex Pattern:</strong></label>
-    <input type="text" id="pattern" placeholder="z. B. example\.com/page/\d+">
+    <label for="pattern" style="margin-top: 8px; display: block;"><strong>New Regex Pattern:</strong></label>
+    <input type="text" id="pattern" placeholder="e.g., example\.com/page/\d+">
 
-    <button id="save-btn">Pattern speichern & Bookmark aktualisieren</button>
+    <button id="save-btn">Save Pattern & Update Bookmark</button>
   </div>
 
   <hr>
 
-  <h3>Gespeicherte Patterns</h3>
+  <h3>Saved Patterns</h3>
   <ul id="pattern-list"></ul>
 
   <script src="quickmark.js"></script>
 </body>
 </html>
-
-
-
-<!-- <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <style>
-    body { font-family: sans-serif; width: 280px; padding: 10px; }
-    input, button { width: 100%; margin-top: 8px; box-sizing: border-box; }
-    #status { font-weight: bold; margin-bottom: 10px; }
-    .hidden { display: none; }
-  </style>
-</head>
-<body>
-  <div id="status">Checking URL...</div>
-
-  <div id="setup-form" class="hidden">
-    <label for="url">Current URL:</label>
-    <input type="text" id="url">
-
-    <label for="pattern">Enter Regex Pattern:</label>
-    <input type="text" id="pattern" placeholder="z. B. example\.com/page/\d+">
-
-    <button id="save-btn">Save Pattern & Update Bookmark</button>
-  </div>
-
-  <script src="quickmark.js"></script>
-</body>
-</html> -->
