@@ -1,0 +1,23 @@
+{
+    "manifest_version": 2,
+    "name": "Quickmark",
+    "version": "0.1.0",
+    "browser_action": {
+        "default_icon": {
+            "32": "icon-32.ico"
+        },
+        "default_popup": "popup.html"
+    },
+    "permissions": ["bookmarks", "activeTab", "storage"],
+    "background": {
+        "scripts": [ "quickmark.js" ]
+    },
+    "icons": {
+        "32": "icon-32.ico"
+    },
+    "browser_specific_settings": {
+        "gecko": {
+            "strict_min_version": "50.0"
+        }
+    }
+}

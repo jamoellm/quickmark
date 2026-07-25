@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: sans-serif; width: 320px; padding: 12px; }
+    input, button { width: 100%; margin-top: 6px; box-sizing: border-box; }
+    #status { font-weight: bold; margin-bottom: 10px; }
+    .hidden { display: none; }
+
+    /* Styling für die Pattern-Liste */
+    hr { margin: 15px 0; border: 0; border-top: 1px solid #ccc; }
+    ul { list-style: none; padding: 0; margin: 8px 0; max-height: 150px; overflow-y: auto; }
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4px 0;
+      border-bottom: 1px solid #eee;
+    }
+    li input[type="text"] { margin: 0; width: 65%; }
+    .actions { display: flex; gap: 4px; width: 30%; }
+    .actions button { margin: 0; padding: 4px; font-size: 11px; cursor: pointer; }
+    .btn-delete { background-color: #ff4d4d; color: white; border: none; border-radius: 3px; }
+    .btn-save { background-color: #4caf50; color: white; border: none; border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <div id="status">Prüfe URL...</div>
+
+  <div id="setup-form" class="hidden">
+    <label for="url"><strong>Aktuelle URL:</strong></label>
+    <input type="text" id="url" readonly>
+
+    <label for="pattern" style="margin-top: 8px; display: block;"><strong>Neues Regex Pattern:</strong></label>
+    <input type="text" id="pattern" placeholder="z. B. example\.com/page/\d+">
+
+    <button id="save-btn">Pattern speichern & Bookmark aktualisieren</button>
+  </div>
+
+  <hr>
+
+  <h3>Gespeicherte Patterns</h3>
+  <ul id="pattern-list"></ul>
+
+  <script src="quickmark.js"></script>
+</body>
+</html>
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: sans-serif; width: 280px; padding: 10px; }
+    input, button { width: 100%; margin-top: 8px; box-sizing: border-box; }
+    #status { font-weight: bold; margin-bottom: 10px; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div id="status">Checking URL...</div>
+
+  <div id="setup-form" class="hidden">
+    <label for="url">Current URL:</label>
+    <input type="text" id="url">
+
+    <label for="pattern">Enter Regex Pattern:</label>
+    <input type="text" id="pattern" placeholder="z. B. example\.com/page/\d+">
+
+    <button id="save-btn">Save Pattern & Update Bookmark</button>
+  </div>
+
+  <script src="quickmark.js"></script>
+</body>
+</html> -->
