@@ -4,7 +4,7 @@
 
 A lightweight Firefox extension designed for websites that don't automatically remember where you left off. With **Quickmark**, you can quickly and easily update your reading or watching progress directly in your bookmarks with a single click.
 
-Simply click the extension icon <img src="icon-32.ico" style="height: 1.2em; vertical-align: middle;"> to start.
+Simply click the extension icon <img src="icon-32.png" style="height: 1.2em; vertical-align: middle;"> to start.
 
 ---
 
@@ -20,12 +20,12 @@ Simply click the extension icon <img src="icon-32.ico" style="height: 1.2em; ver
 
 1. **Initial Setup:**
    * Navigate to the website whose progress you want to track.
-   * Click the extension icon <img src="icon-32.ico" style="height: 1.1em; vertical-align: middle;">.
+   * Click the extension icon <img src="icon-32.png" style="height: 1.1em; vertical-align: middle;">.
    * Enter a Regex pattern matching the URL structure (e.g., `example\.com/page/\d+`).
    * Save the pattern. The extension links it to your existing bookmark.
 
 2. **Save Your Progress:**
-   * As you continue reading or watching, simply click the icon <img src="icon-32.ico" style="height: 1.1em; vertical-align: middle;"> again.
+   * As you continue reading or watching, simply click the icon <img src="icon-32.png" style="height: 1.1em; vertical-align: middle;"> again.
    * Your bookmark is automatically updated to the current URL!
 
 ---

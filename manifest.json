@@ -4,7 +4,7 @@
     "version": "0.1.0",
     "browser_action": {
         "default_icon": {
-            "32": "icon-32.ico"
+            "32": "icon-32.png"
         },
         "default_popup": "popup.html"
     },
@@ -13,11 +13,15 @@
         "scripts": [ "quickmark.js" ]
     },
     "icons": {
-        "32": "icon-32.ico"
+        "32": "icon-32.png"
     },
     "browser_specific_settings": {
         "gecko": {
-            "strict_min_version": "50.0"
+            "id": "quickmark@jamoellm.com",
+            "strict_min_version": "79.0",
+            "data_collection_permissions": {
+              "required": ["none"]
+             }
         }
     }
 }
