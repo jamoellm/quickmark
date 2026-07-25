@@ -34,11 +34,11 @@ Simply click the extension icon <img src="icon-32.ico" style="height: 1.2em; ver
 
 1. Download or clone this repository:
 ```bash
-git clone [https://github.com/your-username/quickmark.git](https://github.com/your-username/quickmark.git)
+git clone git@github.com:jamoellm/quickmark.git
 ```
 2. Open Firefox and type `about:debugging#/runtime/this-firefox` in the address bar.
 3. Click **"Load Temporary Add-on..."**.
-4. Select the `manifest.json` file from the project directory.
+4. Select any file from the project directory.
 
 ---
 
