@@ -161,6 +161,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         statusEl.textContent = "Bookmark successfully updated!";
         setupForm.classList.add("hidden");
       } else {
+        // TODO: Create appropriate bookmark?
         statusEl.textContent = "Pattern matches, but no bookmark found.";
       }
     } catch (e) {
