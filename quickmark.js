@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    savedPatterns.forEach((pattern, index) => {
+    savedPatterns.sort().forEach((pattern, index) => {
       const li = document.createElement("li");
 
       const input = document.createElement("input");
