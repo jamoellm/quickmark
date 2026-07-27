@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // get first pattern that matches the current URL
   const matchedPattern = savedPatterns.find((p) => {
     try {
-      return testRegExp(new RegExp(p),currentUrl);
+      return testRegExp(new RegExp(p), currentUrl);
     } catch (e) {
       return false;
     }
@@ -46,29 +46,50 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   saveBtn.addEventListener("click", async () => {
+    // test if there is a pattern
     const newPattern = patternInput.value.trim();
     if (!newPattern) return;
 
+    // test if there is a _new_ pattern
     if (savedPatterns.includes(newPattern)) {
       statusEl.textContent = "Pattern already exists.";
       return;
     }
 
+    // test if this pattern matches the current URL
     const regex = new RegExp(newPattern);
-    console.log("Testing regex:", regex, "against URL:", currentUrl);
-
     if (!testRegExp(regex, currentUrl)) {
       statusEl.textContent =
         "Pattern does not match the current URL.\n\nPlease refer to the JS documentation for valid regex patterns.";
       return;
     }
 
+    // test if there exists a bookmark that matches this pattern
+    const bookmarkExists = await updateMatchingBookmark(newPattern, currentUrl);
+
+    // if not, create new bookmark
+    if (bookmarkExists === false) {
+      const activeTab = await browser.tabs.query({
+        active: true,
+        currentWindow: true,
+      });
+      const newBookmark = await browser.bookmarks.create({
+        parentId: quickmarkFolder.id,
+        title: activeTab[0].title || "New Bookmark",
+        url: currentUrl,
+      });
+      // console.log("New bookmark created:", newBookmark);
+
+      statusEl.textContent =
+        "Pattern matches current URL, but no bookmark found.\n\nNew bookmark created.";
+    }
+
     savedPatterns.push(newPattern);
     await storageAPI.local.set({ patterns: savedPatterns });
 
     renderPatternList();
-    statusEl.textContent = "Pattern saved!";
-    await updateMatchingBookmark(newPattern, currentUrl);
+    // statusEl.textContent = "Pattern saved!";
+    // await updateMatchingBookmark(newPattern, currentUrl);
   });
 
   function testRegExp(regex, string) {
@@ -155,17 +176,22 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (targetBookmark.length > 1) {
         statusEl.textContent =
           "Warning: The pattern matches multiple bookmarks.";
-        return;
+        return null;
       } else if (targetBookmark.length == 1) {
         await browser.bookmarks.update(targetBookmark[0].id, { url: newUrl });
         statusEl.textContent = "Bookmark successfully updated!";
         setupForm.classList.add("hidden");
+        return true;
       } else {
         // TODO: Create appropriate bookmark?
-        statusEl.textContent = "Pattern matches, but no bookmark found.";
+        statusEl.textContent =
+          "Pattern matches current URL, but no bookmark found.";
+        return false;
       }
     } catch (e) {
       statusEl.textContent = "Invalid Regex Pattern!";
+      return null;
     }
+    return null;
   }
 });

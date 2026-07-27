@@ -1,27 +1,27 @@
 {
-    "manifest_version": 2,
-    "name": "Quickmark",
-    "version": "0.1.0",
-    "browser_action": {
-        "default_icon": {
-            "32": "icon-32.png"
-        },
-        "default_popup": "popup.html"
+  "manifest_version": 2,
+  "name": "Quickmark",
+  "version": "0.1.0",
+  "browser_action": {
+    "default_icon": {
+      "32": "icon-32.png"
     },
-    "permissions": ["bookmarks", "activeTab", "storage"],
-    "background": {
-        "scripts": [ "quickmark.js" ]
-    },
-    "icons": {
-        "32": "icon-32.png"
-    },
-    "browser_specific_settings": {
-        "gecko": {
-            "id": "quickmark@jamoellm.com",
-            "strict_min_version": "79.0",
-            "data_collection_permissions": {
-              "required": ["none"]
-             }
-        }
+    "default_popup": "popup.html"
+  },
+  "permissions": ["bookmarks", "activeTab", "storage", "tabs"],
+  "background": {
+    "scripts": ["quickmark.js"]
+  },
+  "icons": {
+    "32": "icon-32.png"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "quickmark@jamoellm.com",
+      "strict_min_version": "79.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
     }
+  }
 }
