@@ -1,3 +1,55 @@
+async function fetchAndUpdateBookmark(currentUrl) {
+  if (!currentUrl) {
+    return;
+  }
+
+  const storageAPI =
+    typeof browser !== "undefined" && browser.storage
+      ? browser.storage
+      : chrome.storage;
+
+  const data = await storageAPI.local.get("patterns");
+  const savedPatterns = data.patterns || [];
+
+  // get first pattern that matches the current URL
+  const matchedPattern = savedPatterns.find((p) => {
+    try {
+      return testRegExp(new RegExp(p), currentUrl);
+    } catch (e) {
+      console.error(e);
+      return false;
+    }
+  });
+
+  if (!matchedPattern) return;
+
+  const regex = new RegExp(matchedPattern);
+  let bookmarks = await browser.bookmarks.search({});
+
+  const quickmarkFolder = bookmarks.find(
+    (b) => b.title.toLowerCase() === "quickmark",
+  );
+  bookmarks = bookmarks.filter((b) => b.parentId === quickmarkFolder.id);
+
+  const targetBookmark = bookmarks.filter(
+    (b) => b.url && testRegExp(regex, b.url),
+  );
+
+  if (targetBookmark.length == 1) {
+    await browser.bookmarks.update(targetBookmark[0].id, { url: currentUrl });
+  }
+}
+
+// browser.tabs.onUpdated.addListener(
+//   async (tabId, changeInfo, tab) =>
+//     await fetchAndUpdateBookmark(changeInfo.url),
+// );
+browser.webNavigation.onHistoryStateUpdated.addListener(async (details) => {
+  if (details.frameId === 0) {
+    await fetchAndUpdateBookmark(details.url);
+  }
+});
+
 document.addEventListener("DOMContentLoaded", async () => {
   const statusEl = document.getElementById("status");
   const setupForm = document.getElementById("setup-form");
@@ -31,7 +83,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // get first pattern that matches the current URL
   const matchedPattern = savedPatterns.find((p) => {
     try {
-      return testRegExp(new RegExp(p),currentUrl);
+      return testRegExp(new RegExp(p), currentUrl);
     } catch (e) {
       return false;
     }
@@ -70,14 +122,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     statusEl.textContent = "Pattern saved!";
     await updateMatchingBookmark(newPattern, currentUrl);
   });
-
-  function testRegExp(regex, string) {
-    return regex.test(`^${string}$`);
-  }
-
-  function escapeRegExp(string) {
-    return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  }
 
   function renderPatternList() {
     patternListEl.innerHTML = "";
@@ -143,7 +187,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const regex = new RegExp(patternStr);
       let bookmarks = await browser.bookmarks.search({});
 
-      quickmarkFolder = bookmarks.find(
+      const quickmarkFolder = bookmarks.find(
         (b) => b.title.toLowerCase() === "quickmark",
       );
       bookmarks = bookmarks.filter((b) => b.parentId === quickmarkFolder.id);
@@ -161,7 +205,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         statusEl.textContent = "Bookmark successfully updated!";
         setupForm.classList.add("hidden");
       } else {
-        // TODO: Create appropriate bookmark?
         statusEl.textContent = "Pattern matches, but no bookmark found.";
       }
     } catch (e) {
@@ -169,3 +212,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 });
+
+function testRegExp(regex, string) {
+  return regex.test(`^${string}$`);
+}
+
+function escapeRegExp(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
