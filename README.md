@@ -21,7 +21,7 @@ Simply click the extension icon <img src="icon-32.png" style="height: 1.2em; ver
 1. **Initial Setup:**
    - Navigate to the website whose progress you want to track.
    - Click the extension icon <img src="icon-32.png" style="height: 1.1em; vertical-align: middle;">.
-   - Enter a [Regex](#-basic-regex) pattern matching the URL structure (e.g., `example\.com/page/\d+`).
+   - Enter a [↓Regex↓](#-basic-regex) pattern matching the URL structure (e.g., `example\.com/page/\d+`).
    - Save the pattern. The extension links it to your existing bookmark.
 
 2. **Save Your Progress:**
@@ -61,7 +61,7 @@ All data is stored locally.
 | `\w`   | Any Word Character (alphanumeric or underscore) |
 | `+`   | One or More of the Previous Character |
 
-Refer to [Regex101](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Cheatsheet) for more advanced pattern creation.
+Refer to [this guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions/Cheatsheet) for more advanced pattern creation.
 
 ---
 
