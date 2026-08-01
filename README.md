@@ -19,14 +19,20 @@ Simply click the extension icon <img src="icon-32.png" style="height: 1.2em; ver
 ## 💡 How It Works
 
 1. **Initial Setup:**
-   - Navigate to the website whose progress you want to track.
-   - Click the extension icon <img src="icon-32.png" style="height: 1.1em; vertical-align: middle;">.
-   - Enter a [↓Regex↓](#-basic-regex) pattern matching the URL structure (e.g., `example\.com/page/\d+`).
-   - Save the pattern. The extension links it to your existing bookmark.
+  - Create a new bookmark-folder named `Quickmark` anywhere in your bookmarks.
+  - Create a new bookmark within this folder for the page you want to track (e.g., `example.com/page/1`).
+  - Click the extension icon <img src="icon-32.png" style="height: 1.1em; vertical-align: middle;">.
+  - Enter a [↓Regex↓](#-basic-regex) pattern matching the URL structure (e.g., `example\.com/page/\d+`).
+  - Save the pattern. The extension links it to your existing bookmark.
 
 2. **Save Your Progress:**
-   - As you continue reading or watching, simply click the icon <img src="icon-32.png" style="height: 1.1em; vertical-align: middle;"> again.
-   - Your bookmark is automatically updated to the current URL.
+  - As you continue reading or watching, simply click the icon <img src="icon-32.png" style="height: 1.1em; vertical-align: middle;"> again.
+  - Your bookmark is automatically updated to the current URL.
+
+3. **Cross Website Matching**
+If you want to track progress across multiple different websites, simply
+- Create a pattern for each site,
+- Enter a common group-label into the fields beside them.
 
 ---
 

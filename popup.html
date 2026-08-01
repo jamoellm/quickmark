@@ -16,9 +16,23 @@
       justify-content: space-between;
       padding: 4px 0;
       border-bottom: 1px solid #eee;
+      gap: 6px;
     }
-    li input[type="text"] { margin: 0; width: 65%; }
-    .actions { display: flex; gap: 4px; width: 30%; }
+    .inputs {
+      display: flex;
+      gap: 4px;
+      flex: 1;
+      min-width: 0;
+    }
+    .inputs input[type="text"] {
+      margin: 0;
+      flex: 0 0 76%;
+      min-width: 0;
+    }
+    .inputs input[type="text"]:last-child {
+      flex: 0 0 24%;
+    }
+    .actions { display: flex; gap: 4px; flex-shrink: 0; }
     .actions button { margin: 0; padding: 4px; font-size: 11px; cursor: pointer; }
     .btn-delete { background-color: #ff4d4d; color: white; border: none; border-radius: 3px; }
     .btn-save { background-color: #4caf50; color: white; border: none; border-radius: 3px; }
