@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Quickmark",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "browser_action": {
         "default_icon": {
             "32": "icon-32.png"

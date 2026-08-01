@@ -118,8 +118,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     savedPatterns
       .sort((a, b) => {
-        const nameA = savedGroups[a] ? `${savedGroups[a]} - ${a}` : a;
-        const nameB = savedGroups[b] ? `${savedGroups[b]} - ${b}` : b;
+        const nameA = savedGroups[a] ? `${savedGroups[a]} - ${a}` : "zzzzzzzzzz" + a;
+        const nameB = savedGroups[b] ? `${savedGroups[b]} - ${b}` : "zzzzzzzzzz" + b;
 
         if (nameA < nameB) return -1;
         if (nameA > nameB) return 1;
@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const btnSave = document.createElement("button");
         btnSave.textContent = "✓";
         btnSave.className = "btn-save";
-            btnSave.title = "Save changes";
+        btnSave.title = "Save changes";
         btnSave.addEventListener("click", () =>
           updatePattern(index, patternInput.value, groupInput.value),
         );
@@ -167,6 +167,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         actionsDiv.appendChild(btnSave);
         actionsDiv.appendChild(btnDelete);
+
+        ////////////////////////////////////////////////////
 
         li.appendChild(inputsDiv);
         li.appendChild(actionsDiv);
