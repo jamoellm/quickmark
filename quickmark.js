@@ -29,6 +29,8 @@ async function getPatternGroup(pattern, storageAPI) {
   return filteredPatterns;
 }
 
+const UNGROUPED = "No Group";
+
 document.addEventListener("DOMContentLoaded", async () => {
   const statusEl = document.getElementById("status");
   const setupForm = document.getElementById("setup-form");
@@ -116,16 +118,40 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    savedPatterns
-      .sort((a, b) => {
-        const nameA = savedGroups[a] ? `${savedGroups[a]} - ${a}` : "zzzzzzzzzz" + a;
-        const nameB = savedGroups[b] ? `${savedGroups[b]} - ${b}` : "zzzzzzzzzz" + b;
+    const sortedPatterns = savedPatterns.sort((a, b) => {
+      const nameA = savedGroups[a]
+        ? `${savedGroups[a]} - ${a}`
+        : "zzzzzzzzzz" + a;
+      const nameB = savedGroups[b]
+        ? `${savedGroups[b]} - ${b}`
+        : "zzzzzzzzzz" + b;
 
-        if (nameA < nameB) return -1;
-        if (nameA > nameB) return 1;
-        return 0;
-      })
-      .forEach((pattern, index) => {
+      if (nameA < nameB) return -1;
+      if (nameA > nameB) return 1;
+      return 0;
+    });
+
+    const groupedPatterns = Object.groupBy(
+      sortedPatterns,
+      (pattern) => savedGroups[pattern] || UNGROUPED,
+    );
+
+    Object.values(groupedPatterns).forEach((patterns) => {
+      const groupId = savedGroups[patterns[0]] || UNGROUPED;
+
+      const groupDiv = document.createElement("div");
+      groupDiv.className = "group-header";
+
+      groupTitle = document.createElement("strong");
+      groupTitle.textContent = groupId;
+      if (groupId !== Object.keys(groupedPatterns)[0])
+        groupTitle.className = "gets-line";
+
+      groupDiv.appendChild(groupTitle);
+      patternListEl.appendChild(groupDiv);
+
+      patterns.forEach((pattern) => {
+        const index = savedPatterns.indexOf(pattern);
         const li = document.createElement("li");
 
         const inputsDiv = document.createElement("div");
@@ -172,8 +198,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         li.appendChild(inputsDiv);
         li.appendChild(actionsDiv);
-        patternListEl.appendChild(li);
+        groupDiv.appendChild(li);
       });
+    });
   }
 
   async function updatePattern(index, newValue, newGroup) {

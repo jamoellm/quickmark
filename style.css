@@ -1,0 +1,110 @@
+body {
+  position: relative;
+  font-family: sans-serif;
+  width: 320px;
+  padding: 12px;
+}
+
+input,
+button {
+  width: 100%;
+  margin-top: 6px;
+  box-sizing: border-box;
+}
+
+#status {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+hr {
+  margin: 10px 0;
+  border: 0;
+  border-top: 1px solid #ccc;
+}
+
+h3 {
+  margin: 10px 0 4px;
+}
+
+.group-header strong.gets-line {
+  margin-top: 8px;
+  border-top: 1px solid #eee;
+  width: 100%;
+  display: block;
+  padding-top: 4px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0;
+  max-height: 290px;
+  overflow-y: auto;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 0;
+  gap: 6px;
+}
+
+.inputs {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.inputs input[type="text"] {
+  margin: 0;
+  flex: 0 0 76%;
+  min-width: 0;
+}
+
+.inputs input[type="text"]:last-child {
+  flex: 0 0 24%;
+}
+
+.actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.actions button {
+  margin: 0;
+  padding: 4px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.btn-delete {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 3px;
+}
+
+.btn-save {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 3px;
+}
+
+#version-marker {
+  position: absolute;
+  right: 12px;
+  bottom: 2px;
+  margin: 0;
+  color: #999;
+  font-size: 11px;
+  line-height: 1;
+}
