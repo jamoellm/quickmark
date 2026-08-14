@@ -1,24 +1,26 @@
+/* Base */
 body {
   position: relative;
-  font-family: sans-serif;
   width: 320px;
   padding: 12px;
+  font-family: sans-serif;
 }
 
 input,
 button {
+  box-sizing: border-box;
   width: 100%;
   margin-top: 6px;
-  box-sizing: border-box;
 }
 
+/* Typography */
 #status {
-  font-weight: bold;
   margin-bottom: 10px;
+  font-weight: bold;
 }
 
-.hidden {
-  display: none;
+h3 {
+  margin: 10px 0 4px;
 }
 
 hr {
@@ -27,23 +29,88 @@ hr {
   border-top: 1px solid #ccc;
 }
 
-h3 {
-  margin: 10px 0 4px;
+/* Utility / helpers */
+.hidden {
+  display: none;
 }
 
-.group-header strong.gets-line {
-  margin-top: 8px;
-  border-top: 1px solid #eee;
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* App chrome */
+#version-marker {
+  position: absolute;
+  right: 12px;
+  bottom: 2px;
+  margin: 0;
+  color: #999;
+  font-size: 11px;
+  line-height: 1;
+}
+
+.group-header {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.accordeon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
-  display: block;
-  padding-top: 4px;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  transition: 0.4s;
 }
 
+.group-header.gets-line {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  border-top: 1px solid #ccc;
+}
+
+.group-header button.accordeon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+.group-header .accordeon strong {
+  font-size: inherit;
+  font-weight: bold;
+  text-align: left;
+}
+
+.group-header .accordeon .text-right {
+  font-size: 12px;
+  line-height: 1;
+}
+
+.group-body {
+  padding: 0 0px;
+  background-color: white;
+  max-height: 500;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+/* Lists */
 ul {
   list-style: none;
-  padding: 0;
-  margin: 8px 0;
   max-height: 290px;
+  margin: 8px 0;
+  padding: 0;
   overflow-y: auto;
 }
 
@@ -51,21 +118,22 @@ li {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2px 0;
   gap: 6px;
+  padding: 2px 0;
 }
 
+/* Form rows */
 .inputs {
   display: flex;
-  gap: 4px;
   flex: 1;
+  gap: 4px;
   min-width: 0;
 }
 
 .inputs input[type="text"] {
-  margin: 0;
   flex: 0 0 76%;
   min-width: 0;
+  margin: 0;
 }
 
 .inputs input[type="text"]:last-child {
@@ -74,8 +142,8 @@ li {
 
 .actions {
   display: flex;
-  gap: 4px;
   flex-shrink: 0;
+  gap: 4px;
 }
 
 .actions button {
@@ -85,6 +153,7 @@ li {
   cursor: pointer;
 }
 
+/* Buttons */
 .btn-delete {
   background-color: #ff4d4d;
   color: white;
@@ -97,14 +166,4 @@ li {
   color: white;
   border: none;
   border-radius: 3px;
-}
-
-#version-marker {
-  position: absolute;
-  right: 12px;
-  bottom: 2px;
-  margin: 0;
-  color: #999;
-  font-size: 11px;
-  line-height: 1;
 }

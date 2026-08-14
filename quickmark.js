@@ -140,15 +140,33 @@ document.addEventListener("DOMContentLoaded", async () => {
       const groupId = savedGroups[patterns[0]] || UNGROUPED;
 
       const groupDiv = document.createElement("div");
-      groupDiv.className = "group-header";
-
-      groupTitle = document.createElement("strong");
-      groupTitle.textContent = groupId;
-      if (groupId !== Object.keys(groupedPatterns)[0])
-        groupTitle.className = "gets-line";
-
-      groupDiv.appendChild(groupTitle);
+      groupDiv.className = "group-box";
       patternListEl.appendChild(groupDiv);
+
+        groupHeader = document.createElement("div");
+        groupHeader.className = "group-header";
+        groupDiv.appendChild(groupHeader);
+        if (groupId !== Object.keys(groupedPatterns)[0])
+          groupHeader.classList.add("gets-line");
+
+          accordeonButton = document.createElement("button");
+          accordeonButton.className = "accordeon";
+          groupHeader.appendChild(accordeonButton);
+
+            groupTitle = document.createElement("strong");
+            groupTitle.textContent = groupId;
+            groupTitle.classList.add("text-left");
+            accordeonButton.appendChild(groupTitle);
+
+            accordeonIcon = document.createElement("span");
+            accordeonIcon.className = "accordeon-icon";
+            accordeonIcon.classList.add("text-right");
+            accordeonIcon.textContent = "▼";
+            accordeonButton.appendChild(accordeonIcon);
+
+        groupBody = document.createElement("div");
+        groupBody.className = "group-body";
+        groupDiv.appendChild(groupBody);
 
       patterns.forEach((pattern) => {
         const index = savedPatterns.indexOf(pattern);
@@ -198,9 +216,22 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         li.appendChild(inputsDiv);
         li.appendChild(actionsDiv);
-        groupDiv.appendChild(li);
+        groupBody.appendChild(li);
       });
     });
+
+    const accordeonButtons = document.querySelectorAll(".group-header button.accordeon");
+    for (let i = 0; i < accordeonButtons.length; i++) {
+      accordeonButtons[i].addEventListener("click", function() {
+        const panel = this.parentElement.nextElementSibling;
+        const isHidden = panel.classList.toggle("hidden");
+
+        const icon = this.querySelector(".text-right");
+        if (icon) {
+          icon.textContent = isHidden ? "◄" : "▼";
+        }
+      });
+    }
   }
 
   async function updatePattern(index, newValue, newGroup) {
