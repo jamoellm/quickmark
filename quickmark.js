@@ -30,6 +30,16 @@ async function getPatternGroup(pattern, storageAPI) {
 }
 
 const UNGROUPED = "No Group";
+const ACCORDION_STATE_KEY = "accordionState";
+
+async function readAccordionState(storageAPI) {
+  const data = await storageAPI.local.get(ACCORDION_STATE_KEY);
+  return data[ACCORDION_STATE_KEY] || {};
+}
+
+async function saveAccordionState(storageAPI, state) {
+  await storageAPI.local.set({ [ACCORDION_STATE_KEY]: state });
+}
 
 document.addEventListener("DOMContentLoaded", async () => {
   const statusEl = document.getElementById("status");
@@ -109,7 +119,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     await updateMatchingBookmark(newPattern, currentUrl);
   });
 
-  function renderPatternList() {
+  async function renderPatternList() {
     patternListEl.innerHTML = "";
 
     if (savedPatterns.length === 0) {
@@ -136,6 +146,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       (pattern) => savedGroups[pattern] || UNGROUPED,
     );
 
+    const accordionState = await readAccordionState(storageAPI);
+
     Object.values(groupedPatterns).forEach((patterns) => {
       const groupId = savedGroups[patterns[0]] || UNGROUPED;
 
@@ -143,30 +155,37 @@ document.addEventListener("DOMContentLoaded", async () => {
       groupDiv.className = "group-box";
       patternListEl.appendChild(groupDiv);
 
-        groupHeader = document.createElement("div");
-        groupHeader.className = "group-header";
-        groupDiv.appendChild(groupHeader);
-        if (groupId !== Object.keys(groupedPatterns)[0])
-          groupHeader.classList.add("gets-line");
+      const groupHeader = document.createElement("div");
+      groupHeader.className = "group-header";
+      groupDiv.appendChild(groupHeader);
+      if (groupId !== Object.keys(groupedPatterns)[0]) {
+        groupHeader.classList.add("gets-line");
+      }
 
-          accordeonButton = document.createElement("button");
-          accordeonButton.className = "accordeon";
-          groupHeader.appendChild(accordeonButton);
+      const accordeonButton = document.createElement("button");
+      accordeonButton.className = "accordeon";
+      groupHeader.appendChild(accordeonButton);
 
-            groupTitle = document.createElement("strong");
-            groupTitle.textContent = groupId;
-            groupTitle.classList.add("text-left");
-            accordeonButton.appendChild(groupTitle);
+      const groupTitle = document.createElement("strong");
+      groupTitle.textContent = groupId;
+      groupTitle.classList.add("text-left");
+      accordeonButton.appendChild(groupTitle);
 
-            accordeonIcon = document.createElement("span");
-            accordeonIcon.className = "accordeon-icon";
-            accordeonIcon.classList.add("text-right");
-            accordeonIcon.textContent = "▼";
-            accordeonButton.appendChild(accordeonIcon);
+      const accordeonIcon = document.createElement("span");
+      accordeonIcon.className = "accordeon-icon";
+      accordeonIcon.classList.add("text-right");
+      accordeonIcon.textContent = "▼";
+      accordeonButton.appendChild(accordeonIcon);
 
-        groupBody = document.createElement("div");
-        groupBody.className = "group-body";
-        groupDiv.appendChild(groupBody);
+      const groupBody = document.createElement("div");
+      groupBody.className = "group-body";
+      groupDiv.appendChild(groupBody);
+
+      const isCollapsed = !!accordionState[groupId];
+      if (isCollapsed) {
+        groupBody.classList.add("hidden");
+        accordeonIcon.textContent = "◄";
+      }
 
       patterns.forEach((pattern) => {
         const index = savedPatterns.indexOf(pattern);
@@ -222,7 +241,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const accordeonButtons = document.querySelectorAll(".group-header button.accordeon");
     for (let i = 0; i < accordeonButtons.length; i++) {
-      accordeonButtons[i].addEventListener("click", function() {
+      accordeonButtons[i].addEventListener("click", async function() {
         const panel = this.parentElement.nextElementSibling;
         const isHidden = panel.classList.toggle("hidden");
 
@@ -230,6 +249,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (icon) {
           icon.textContent = isHidden ? "◄" : "▼";
         }
+
+        const groupName = this.querySelector("strong")?.textContent || UNGROUPED;
+        const accordionState = await readAccordionState(storageAPI);
+        accordionState[groupName] = isHidden;
+        await saveAccordionState(storageAPI, accordionState);
       });
     }
   }
