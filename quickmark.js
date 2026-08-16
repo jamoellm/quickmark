@@ -89,13 +89,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     setupForm.classList.remove("hidden");
   }
 
-  saveBtn.addEventListener("click", insertPattern);
-  patternInput.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      insertPattern();
-    }
-});
-
   insertPattern = async () => {
     const newPattern = patternInput.value.trim();
     if (!newPattern) return;
@@ -125,6 +118,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     statusEl.textContent = "Pattern saved!";
     await updateMatchingBookmark(newPattern, currentUrl);
   };
+
+  saveBtn.addEventListener("click", insertPattern);
+  patternInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      insertPattern();
+    }
+  });
 
   async function renderPatternList() {
     patternListEl.innerHTML = "";
