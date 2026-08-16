@@ -89,7 +89,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     setupForm.classList.remove("hidden");
   }
 
-  saveBtn.addEventListener("click", async () => {
+  saveBtn.addEventListener("click", insertPattern);
+  patternInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      insertPattern();
+    }
+});
+
+  insertPattern = async () => {
     const newPattern = patternInput.value.trim();
     if (!newPattern) return;
 
@@ -117,7 +124,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderPatternList();
     statusEl.textContent = "Pattern saved!";
     await updateMatchingBookmark(newPattern, currentUrl);
-  });
+  };
 
   async function renderPatternList() {
     patternListEl.innerHTML = "";
@@ -198,11 +205,21 @@ document.addEventListener("DOMContentLoaded", async () => {
         patternInput.type = "text";
         patternInput.value = pattern;
         patternInput.placeholder = "URL Pattern (Regex)";
+        patternInput.addEventListener("keydown", (event) => {
+          if (event.key === "Enter") {
+            updatePattern(index, patternInput.value, groupInput.value);
+          }
+        });
 
         const groupInput = document.createElement("input");
         groupInput.type = "text";
         groupInput.value = savedGroups[pattern] || "";
         groupInput.placeholder = "Group Id";
+        groupInput.addEventListener("keydown", (event) => {
+          if (event.key === "Enter") {
+            updatePattern(index, patternInput.value, groupInput.value);
+          }
+        });
 
         inputsDiv.appendChild(patternInput);
         inputsDiv.appendChild(groupInput);
@@ -239,9 +256,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     });
 
-    const accordeonButtons = document.querySelectorAll(".group-header button.accordeon");
+    const accordeonButtons = document.querySelectorAll(
+      ".group-header button.accordeon",
+    );
     for (let i = 0; i < accordeonButtons.length; i++) {
-      accordeonButtons[i].addEventListener("click", async function() {
+      accordeonButtons[i].addEventListener("click", async function () {
         const panel = this.parentElement.nextElementSibling;
         const isHidden = panel.classList.toggle("hidden");
 
@@ -250,7 +269,8 @@ document.addEventListener("DOMContentLoaded", async () => {
           icon.textContent = isHidden ? "◄" : "▼";
         }
 
-        const groupName = this.querySelector("strong")?.textContent || UNGROUPED;
+        const groupName =
+          this.querySelector("strong")?.textContent || UNGROUPED;
         const accordionState = await readAccordionState(storageAPI);
         accordionState[groupName] = isHidden;
         await saveAccordionState(storageAPI, accordionState);
